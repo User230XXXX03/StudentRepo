@@ -1,24 +1,26 @@
-//Create list of ints from 1 to 5, Haskell equivalent [1..5]
-function arrFunc(){
+// Create list of ints from a to b
+function arrFunc(a, b) {
     let arr = [];
-    for (let i = 1; i<=5; i++) {
+    for (let i = a; i <= b; i++) {
         arr.push(i);
     }
     return arr;    
 }
 
-function applicatorFunc(inpFunc, s){
-    if(s=='s'){
-        const arr = inpFunc();        
+function applicatorFunc(inpFunc, s, a, b) {
+    const arr = inpFunc(a, b);
+    if (s == 's') {
         let sum = arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
         return sum;
-    }
-    else{        
-        const arr = inpFunc();
+    } else if (s == 'a') {
         let sum = arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-        return sum/5;
+        return sum / arr.length;
+    } else {
+        throw new Error("Invalid operation");
     }
 }
 
-let x = applicatorFunc(arrFunc, 's');
+let a = 1;
+let b = 10;
+let x = applicatorFunc(arrFunc, 'a', a, b); // Call applicatorFunc with arrFunc, 'a', a, and b as args
 console.log(x);

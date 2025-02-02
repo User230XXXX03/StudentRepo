@@ -1,9 +1,15 @@
 --create inpFunc
-inpFunc = [1..5] 
+inpFunc a b = [a..b]
 
---Define applicatorFunc
-applicatorFunc inpFunc s = if s=='s' then sum inpFunc else (sum inpFunc)/5  
+-- Define applicatorFunc
+applicatorFunc inpFunc s a b 
+    | s == 's'  = sum list
+    | s == 'a'  = (sum list) / fromIntegral (length list)
+    | otherwise = error "Invalid operation"
+    where list = inpFunc a b
 
 main = do
-    let result = applicatorFunc inpFunc 'a' --Call applicatorFunc with inpFunc and 'a' as args
-    putStrLn("sum = " ++ show(result))
+    let a = 1
+    let b = 10
+    let result = applicatorFunc inpFunc 'a' a b -- Call applicatorFunc with inpFunc, 'a', a, and b as args
+    putStrLn ("sum/average = " ++ show result)
